@@ -1,0 +1,16 @@
+{% if user.is_applicant or user.id in companies_id %}
+
+    <h4>You're not allowed in this page</h4>
+    <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);">
+
+{% else %}
+
+  <h1>Complete Register</h1>
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" id="submit">Submit</button>
+  </form>
+
+{% endif %}
