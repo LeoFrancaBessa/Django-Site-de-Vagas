@@ -1,10 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
-# Create your models here.
+
 
 #Classe princial dos usuários
 class User(AbstractUser):
+    
     email = models.EmailField(unique=True, verbose_name="E-mail")
     is_company = models.BooleanField(default=False)
     is_applicant = models.BooleanField(default=False)
@@ -21,7 +22,7 @@ class Applicant(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
-    name = models.CharField(max_length=200, verbose_name="Nome")
+    nome = models.CharField(max_length=200, verbose_name="Nome")
     
     sal = (("1000", "Até R$ 1000"), 
                     ("1000 - 2000", "De R$ 1000 a R$ 2000"),
@@ -48,7 +49,7 @@ class Applicant(models.Model):
 class Company(models.Model):
 
     def __str__(self):
-        return self.name
+        return self.nome
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    name = models.CharField(verbose_name="Nome", max_length=200)
+    nome = models.CharField(verbose_name="Nome", max_length=200)

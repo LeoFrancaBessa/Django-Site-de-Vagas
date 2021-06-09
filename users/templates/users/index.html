@@ -1,8 +1,8 @@
 <h1>Hello</h1>
 <h2>Select user type</h2>
 
-<button><a href="{% url 'register-applicant' %}">Applicant Register</a></button>
-<button><a href="{% url 'register-company' %}">Company Register</a></button>
+<button><a href="{% url 'users:register-applicant' %}">Applicant Register</a></button>
+<button><a href="{% url 'users:register-company' %}">Company Register</a></button>
 
 <h2>Already has an account?</h2>
-<button><a href="{% url 'login' %}">Login</a></button>
+<button><a href="{% url 'users:login' %}">Login</a></button>

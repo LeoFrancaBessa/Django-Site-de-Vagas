@@ -1,0 +1,24 @@
+{% if user.is_applicant %}
+
+    <p>You're not allowed in this page</p>
+
+    <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);">
+
+
+{% elif user.id not in company_id %}
+
+    <p>You have to complete you registration first</p>
+
+    <button><a href="{% url 'users:company-register-complete' %}">Complete Registration</a></button>
+
+
+{% else %}
+
+    <form method = "POST">
+        {% csrf_token %}
+        <p>Are you sure you want to delete this vacancie: {{vacancie}}?</p>
+        <input type="submit" value="Confirm">
+    </form>
+    <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);">
+
+{% endif %}
