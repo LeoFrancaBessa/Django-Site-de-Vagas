@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'applicant.apps.ApplicantConfig',
     'vacancies.apps.VacanciesConfig',
     'users.apps.UsersConfig',
     'django.contrib.admin',
@@ -130,6 +131,6 @@ AUTH_USER_MODEL = 'users.User'
 
 AUTHENTICATION_BACKENDS = ['users.backends.EmailBackend']
 
-LOGIN_REDIRECT_URL = '/listar-usuarios'
+LOGIN_REDIRECT_URL = 'users:login-success'
 
 LOGIN_URL = 'users:login'

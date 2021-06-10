@@ -26,6 +26,18 @@ class LoginView(auth_views.LoginView):
     redirect_authenticated_user = True
 
 
+
+#Redireciona o usuário baseado em seu tipo
+def login_success(request):
+
+    if request.user.is_applicant:
+        return redirect('applicant:list-vacancies-applicant')
+    
+    else:
+        return redirect('vacancies:list-vacancies')
+
+
+
 #View que realizará o cadastro dos participantes
 class ApplicantRegisterView(generic.CreateView):
 
@@ -116,13 +128,4 @@ class CompanyCompleteRegister(generic.CreateView):
         return context
         
 
-
-
-
-#View para teste
-@method_decorator([login_required], name='dispatch')
-class ListUser(generic.ListView):
-    model = User
-    context_object_name = "users"
-    template_name = "users/list_user.html"
 

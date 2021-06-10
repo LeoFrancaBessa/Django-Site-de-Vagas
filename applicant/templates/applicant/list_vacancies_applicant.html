@@ -1,0 +1,30 @@
+{% if user.is_company %}
+
+    <p>You're not allowed in this page</p>
+
+    <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);">
+
+
+{% elif user.id not in applicant_id %}
+
+    <p>You have to complete you registration first</p>
+
+    <button><a href="{% url 'users:applicant-register-complete' %}">Complete Registration</a></button>
+
+
+{% else %}
+    
+    {% for appl in  applicants %}
+        {% if appl.user_id == user.id %}
+            <button><a href="{% url 'applicant:update-register' appl.id %}">Edit Register</a></button>
+        {% endif %}
+    {% endfor %}
+
+    <button><a href="{% url 'users:logout' %}">Logout</a></button>
+
+    {% for vac in vacancies %}
+        <h1>{{vac}}</h1>
+    {% endfor %}
+
+{% endif %}
+

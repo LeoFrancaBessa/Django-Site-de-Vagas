@@ -81,6 +81,7 @@ class UpdateVacancie(generic.UpdateView):
 
 
 
+@method_decorator([login_required], name='dispatch')
 #Deletar vagas
 class DeleteVacancie(generic.DeleteView):
     model = Vacancies
@@ -94,5 +95,26 @@ class DeleteVacancie(generic.DeleteView):
 
         #checar se a empresa já completou o seu cadastro
         context['company_id'] = Company.objects.values_list('user', flat=True)
+
+        return context
+
+
+
+@method_decorator([login_required], name='dispatch')
+class DetailVacancie(generic.DetailView):
+    model = Vacancies
+    context_object_name = "vacancie"
+    template_name = "vacancies/detail_vacancie.html"
+
+
+    def get_context_data(self, **kwargs):
+    
+        context = super().get_context_data(**kwargs)
+
+        #checar se a empresa já completou o seu cadastro
+        context['company_id'] = Company.objects.values_list('user', flat=True)
+
+        #passar os usuários cadastrados na vaga em questão
+        context['vacancies_applications'] = VacanciesApplications.objects.all()
 
         return context

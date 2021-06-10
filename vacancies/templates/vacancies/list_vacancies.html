@@ -14,18 +14,18 @@
 
 {% else %}
 
+    <button><a href="{% url 'users:logout' %}">Logout</a></button>
     <button><a href="{% url 'vacancies:create-vacancie' %}">Create Vacancie</a></button>
 
     {% for vacancie in vacancies %}
     
-        <h2>{{vacancie.nome}}</h2> 
+        <h2><a href="{% url 'vacancies:detail-vacancie' vacancie.id %}">{{vacancie.nome}}</a></h2> 
         <a href="{% url 'vacancies:update-vacancie' vacancie.id %}">Edit</a>
         <a href="{% url 'vacancies:delete-vacancie' vacancie.id %}">Delete</a>
 
     {% empty %}
 
         <h2>You dont have any vacancies yet</h2>
-        <button><a href="{% url 'vacancies:create-vacancie' %}">Create Vacancie</a></button>
 
     {% endfor %}
 
