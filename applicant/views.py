@@ -7,7 +7,7 @@ from django.utils.decorators import method_decorator
 from vacancies.models import Vacancies, VacanciesApplications
 from users.models import Applicant
 from django.core import serializers
-
+from django.contrib import messages
 
 
 #View para listar todas as vagas
@@ -77,10 +77,14 @@ def confirm_vacancie_application(request):
     applicant = Applicant.objects.get(user=request.user)
 
     #Restrição para impedir que o mesmo candidato se increva na mesma vaga várias vezes
-    
+    if (VacanciesApplications.objects.filter(vaga = vacancie).exists() and VacanciesApplications.objects.filter(candidato = applicant).exists()):
+        
+        messages.info(request, 'Você já realizou sua candidatura nesta vaga!')
+        return redirect('applicant:list-vacancies-applicant')
 
     #Salvando
     vacan_appli = VacanciesApplications(vaga=vacancie, candidato=applicant)
     vacan_appli.save()
 
+    messages.info(request, 'Candidatura realizada com sucesso!')
     return redirect('applicant:list-vacancies-applicant')
