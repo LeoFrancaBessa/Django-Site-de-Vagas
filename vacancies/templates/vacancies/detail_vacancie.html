@@ -17,7 +17,7 @@
         <h3>Company: {{vacancie.company}}</h3>
         <h3>Name: {{vacancie.nome}}</h3>
 
-        <h2>Applicants in this vacancie</h2>
+        <h2>Applicants in this vacancie: {{num_applicants}}</h2>
 
         {% for va in vacancies_applications %}
             {% if va.vaga == vacancie %}

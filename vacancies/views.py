@@ -117,6 +117,10 @@ class DetailVacancie(generic.DetailView):
         #passar os usuários cadastrados na vaga em questão
         context['vacancies_applications'] = VacanciesApplications.objects.all()
 
+        #Pegar número de candidatos cadastrados na vaga
+        vacancie_obj = Vacancies.objects.get(pk=context['vacancie'].id)
+        context['num_applicants'] = VacanciesApplications.objects.filter(vaga=vacancie_obj).count()
+
         return context
 
 

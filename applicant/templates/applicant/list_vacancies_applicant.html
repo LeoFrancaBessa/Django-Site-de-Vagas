@@ -30,6 +30,13 @@
 
     <button><a href="{% url 'users:logout' %}">Logout</a></button>
 
+
+    <form method="GET" style="margin-top: 1%;">
+        <input type="text" name="search-area" value="{{search_input}}">
+        <input class="button" type="submit" value="Search">
+    </form>
+
+
     {% for vac in vacancies %}
         <h1><a href="{% url 'applicant:detail-vacancie-applicant' vac.id %}">{{vac}}</a></h1>
     {% endfor %}

@@ -10,6 +10,7 @@ from django.core import serializers
 from django.contrib import messages
 
 
+
 #View para listar todas as vagas
 @method_decorator([login_required], name='dispatch')
 class ListVacanciesApplicant(generic.ListView):
@@ -21,6 +22,16 @@ class ListVacanciesApplicant(generic.ListView):
     
         context = super().get_context_data(**kwargs)
 
+        #Função de pesquisar vagas
+        search_input = self.request.GET.get('search-area') or ''
+        if search_input:
+            context['vacancies'] = context['vacancies'].filter(
+                nome__icontains=search_input)
+
+        
+        #Serve para manter o texto no campo de pesquisa
+        context['search_input'] = search_input
+
         #checar se o candidato já completou o seu cadastro
         context['applicant_id'] = Applicant.objects.values_list('user', flat=True)
 
@@ -28,6 +39,7 @@ class ListVacanciesApplicant(generic.ListView):
         context['applicants'] = Applicant.objects.all()
 
         return context
+
 
 
 @method_decorator([login_required], name='dispatch')
@@ -45,6 +57,7 @@ class RegisterUpdate(generic.UpdateView):
         context['applicant_id'] = Applicant.objects.values_list('user', flat=True)
 
         return context
+
 
 
 @method_decorator([login_required], name='dispatch')
@@ -68,6 +81,7 @@ class DetailVacanciesApplicant(generic.DetailView):
         return context
 
 
+
 #View para registrar o candidato a vaga
 @login_required
 def confirm_vacancie_application(request):
@@ -76,11 +90,12 @@ def confirm_vacancie_application(request):
     vacancie = Vacancies.objects.get(pk=request.session.get('vacancie_id'))
     applicant = Applicant.objects.get(user=request.user)
 
+
     #Restrição para impedir que o mesmo candidato se increva na mesma vaga várias vezes
     if (VacanciesApplications.objects.filter(vaga = vacancie).exists() and VacanciesApplications.objects.filter(candidato = applicant).exists()):
-        
         messages.info(request, 'Você já realizou sua candidatura nesta vaga!')
         return redirect('applicant:list-vacancies-applicant')
+
 
     #Salvando
     vacan_appli = VacanciesApplications(vaga=vacancie, candidato=applicant)
