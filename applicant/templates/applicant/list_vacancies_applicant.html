@@ -23,7 +23,7 @@
     <button><a href="{% url 'users:logout' %}">Logout</a></button>
 
     {% for vac in vacancies %}
-        <h1>{{vac}}</h1>
+        <h1><a href="{% url 'applicant:detail-vacancie-applicant' vac.id %}">{{vac}}</a></h1>
     {% endfor %}
 
 {% endif %}

@@ -42,4 +42,3 @@ class VacanciesApplications(models.Model):
     vaga = models.ForeignKey(Vacancies, on_delete=models.CASCADE)
     candidato = models.ForeignKey(Applicant, on_delete=models.CASCADE)
     data = models.DateTimeField(verbose_name="Data do Registro", auto_now=True)
-    pontos = models.PositiveIntegerField(verbose_name="Pontos do Candidato")
