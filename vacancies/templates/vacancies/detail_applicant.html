@@ -14,17 +14,8 @@
 
 {% else %}
 
-        <h3>Company: {{vacancie.company}}</h3>
-        <h3>Name: {{vacancie.nome}}</h3>
-
-        <h2>Applicants in this vacancie</h2>
-
-        {% for va in vacancies_applications %}
-            {% if va.vaga == vacancie %}
-                <p><a href="{% url 'vacancies:detail-applicant' va.candidato.pk %}">{{va.candidato}}</a></p>
-            {% endif %}
-        {% endfor %}
-
+        <h3>{{applicant.nome}}</h3>
+        
         <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);">
 {% endif %}
 

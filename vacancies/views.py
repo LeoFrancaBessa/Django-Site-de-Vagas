@@ -118,3 +118,23 @@ class DetailVacancie(generic.DetailView):
         context['vacancies_applications'] = VacanciesApplications.objects.all()
 
         return context
+
+
+
+class DetailApplicant(generic.DetailView):
+    model = Applicant
+    context_object_name = "applicant"
+    template_name = "vacancies/detail_applicant.html"
+
+
+    def get_context_data(self, **kwargs):
+    
+        context = super().get_context_data(**kwargs)
+
+        #checar se a empresa já completou o seu cadastro
+        context['company_id'] = Company.objects.values_list('user', flat=True)
+
+        #passar os usuários cadastrados na vaga em questão
+        context['vacancies_applications'] = VacanciesApplications.objects.all()
+
+        return context
