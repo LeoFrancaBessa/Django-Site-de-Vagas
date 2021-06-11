@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'charts.apps.ChartsConfig',
     'applicant.apps.ApplicantConfig',
     'vacancies.apps.VacanciesConfig',
     'users.apps.UsersConfig',

@@ -43,6 +43,8 @@ class Applicant(models.Model):
 
     escolaridade = models.CharField(max_length=20, choices=escol, verbose_name="Última Escolaridade")
 
+    data_cadastro = models.DateField(auto_now=True)
+
 
 
 #Classe para as empresas

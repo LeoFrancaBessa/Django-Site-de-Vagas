@@ -100,6 +100,7 @@ class DeleteVacancie(generic.DeleteView):
 
 
 
+#Detalhes da vagas
 @method_decorator([login_required], name='dispatch')
 class DetailVacancie(generic.DetailView):
     model = Vacancies
@@ -125,6 +126,7 @@ class DetailVacancie(generic.DetailView):
 
 
 
+#Detalhes do candidato
 class DetailApplicant(generic.DetailView):
     model = Applicant
     context_object_name = "applicant"

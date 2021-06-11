@@ -33,8 +33,11 @@ def login_success(request):
     if request.user.is_applicant:
         return redirect('applicant:list-vacancies-applicant')
     
-    else:
+    elif request.user.is_company:
         return redirect('vacancies:list-vacancies')
+
+    elif request.user.is_staff:
+        return redirect('charts:chart-index')
 
 
 
@@ -84,7 +87,7 @@ class ApplicantCompleteRegister(generic.CreateView):
     model = Applicant
     template_name = "users/applicant_complete_register.html"
     fields = ['nome', 'faixa_salarial', 'exp', 'escolaridade']
-    success_url = reverse_lazy('users:list-user')
+    success_url = reverse_lazy('applicant:list-vacancies-applicant')
 
 
     def  form_valid(self, form):

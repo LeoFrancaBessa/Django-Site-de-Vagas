@@ -21,4 +21,5 @@ urlpatterns = [
     path('', include(('users.urls', 'users'), namespace='users')),
     path('vagas/', include(('vacancies.urls', 'vacancies'), namespace='vacancies')),
     path('candidato/', include(('applicant.urls', 'applicant'), namespace='applicant')),
+    path('relatorios/', include(('charts.urls', 'charts'), namespace='charts')),
 ]

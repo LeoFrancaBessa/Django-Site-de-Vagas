@@ -90,6 +90,14 @@ def confirm_vacancie_application(request):
     vacancie = Vacancies.objects.get(pk=request.session.get('vacancie_id'))
     applicant = Applicant.objects.get(user=request.user)
 
+    #Pontos do Candidato
+    pontos = 0
+    if (vacancie.faixa_salarial == applicant.faixa_salarial):
+        pontos += 1
+
+    if( vacancie.escolaridade == applicant.escolaridade):
+        pontos += 1
+    
 
     #Restrição para impedir que o mesmo candidato se increva na mesma vaga várias vezes
     if (VacanciesApplications.objects.filter(vaga = vacancie).exists() and VacanciesApplications.objects.filter(candidato = applicant).exists()):
@@ -98,7 +106,7 @@ def confirm_vacancie_application(request):
 
 
     #Salvando
-    vacan_appli = VacanciesApplications(vaga=vacancie, candidato=applicant)
+    vacan_appli = VacanciesApplications(vaga=vacancie, candidato=applicant, pontos_candidato=pontos)
     vacan_appli.save()
 
     messages.info(request, 'Candidatura realizada com sucesso!')

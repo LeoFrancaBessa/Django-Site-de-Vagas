@@ -9,6 +9,11 @@ class Vacancies(models.Model):
     def __str__(self):
         return self.nome
 
+
+    class Meta:
+        verbose_name = 'Vacancie'
+        verbose_name_plural = 'Vacancies'
+
     company = models.ForeignKey(Company, verbose_name="Empresa", on_delete=models.CASCADE)
     nome = models.CharField(max_length=100, verbose_name="Título")
 
@@ -34,11 +39,18 @@ class Vacancies(models.Model):
 
     escolaridade = models.CharField(max_length=20, choices=escol, verbose_name="Escolaridade Mínima")
 
+    data_criacao = models.DateField(auto_now=True)
+
 
 
 #Classe para registrar as aplicações de vagas dos candidatos
 class VacanciesApplications(models.Model):
     
+    class Meta:
+        verbose_name = 'Vacancies Application'
+        verbose_name_plural = 'Vacancies Applications'
+
+
     vaga = models.ForeignKey(Vacancies, on_delete=models.CASCADE)
     candidato = models.ForeignKey(Applicant, on_delete=models.CASCADE)
-    data = models.DateTimeField(verbose_name="Data do Registro", auto_now=True)
+    pontos_candidato = models.PositiveIntegerField(verbose_name="Pontos do Candidato")

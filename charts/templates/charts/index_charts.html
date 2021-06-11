@@ -1,0 +1,12 @@
+<button><a href="{% url 'users:logout' %}">Logout</a></button>
+
+{% if not user.is_staff %}
+    <h2>You are not allowed</h2>
+    <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);">
+    
+    {% else %}
+
+    <button><a href="{% url 'charts:chart-vacancies' %}">Vacancies Chart</a></button>
+    <button><a href="{% url 'charts:chart-applicants' %}">Applicants Chart</a></button>
+{% endif %}
+

@@ -22,6 +22,7 @@
         {% for va in vacancies_applications %}
             {% if va.vaga == vacancie %}
                 <p><a href="{% url 'vacancies:detail-applicant' va.candidato.pk %}">{{va.candidato}}</a></p>
+                <p>Points: {{va.pontos_candidato}}</p>
             {% endif %}
         {% endfor %}
 
