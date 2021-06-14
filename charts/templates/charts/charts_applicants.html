@@ -9,17 +9,19 @@
   <title>Document</title>
 </head>
 
+{% extends 'charts/base.html' %}
 
+{% block content %}
 <body>
 
   {% if not user.is_staff %}
 
       <h2>You are not allowed</h2>
-      <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);">
+      <button type="submit" onclick="history.go(-1);" class="inline">Voltar</button>
     
   {% else %}
 
-    <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);">
+    <button type="submit" onclick="history.go(-1);" class="inline">Voltar</button>
       
     <canvas id="chart" width="100" height="100"></canvas>
 
@@ -68,6 +70,7 @@
 
   {% endif %}
 </body>
+{% endblock content %}
 
 
 </html>

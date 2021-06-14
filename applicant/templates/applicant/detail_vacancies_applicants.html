@@ -6,14 +6,14 @@
 
     <h4>Você não é permitido aqui</h4>
 
-    <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);">
+    <button type="submit" onclick="history.go(-1);" class="inline">Voltar</button>
 
 
 {% elif user.id not in applicant_id %}
 
     <h4>Você precisa completar seu cadastro</h4>
 
-    <button><a href="{% url 'users:applicant-register-complete' %}">Complete Registration</a></button>
+    <button><a href="{% url 'users:applicant-register-complete' %}">Completar Cadastro</a></button>
 
 
 {% else %}

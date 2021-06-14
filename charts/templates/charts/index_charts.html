@@ -1,12 +1,30 @@
-<button><a href="{% url 'users:logout' %}">Logout</a></button>
+{% extends 'charts/base.html' %}
+
+{% block content %}
+
 
 {% if not user.is_staff %}
-    <h2>You are not allowed</h2>
-    <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);">
+    <h2>Você não é permitido aqui </h2>
+    <button type="submit" onclick="history.go(-1);" class="inline">Voltar</button>
     
     {% else %}
 
-    <button><a href="{% url 'charts:chart-vacancies' %}">Vacancies Chart</a></button>
-    <button><a href="{% url 'charts:chart-applicants' %}">Applicants Chart</a></button>
+    <div class="header-bar">
+        <h1>Relatórios</h1>
+    </div>
+    
+    <form action="{% url 'users:logout' %}">
+        <button type="submit" class="button_margin_top">Logout</button>
+    </form>
+
+    <form action="{% url 'charts:chart-vacancies' %}">
+        <button type="submit" class="button_margin_top">Relatório de Vagas</button>
+    </form>
+
+    <form action="{% url 'charts:chart-applicants' %}">
+        <button type="submit" class="button_margin_top">Relatório de Candidatos</button>
+    </form>
+
 {% endif %}
 
+{% endblock content %}
