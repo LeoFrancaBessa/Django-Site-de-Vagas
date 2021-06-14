@@ -1,16 +1,24 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
+
 {% if user.is_applicant or user.id in companies_id %}
 
-    <h4>You're not allowed in this page</h4>
+    <h4>Você não é permitido aqui</h4>
     <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);">
 
 {% else %}
 
-  <h1>Complete Register</h1>
+  <div class="header-bar">
+    <h1>Completar Registro</h1>
+  </div>
 
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" id="submit">Submit</button>
+    <button type="submit" id="submit">Enviar</button>
   </form>
 
 {% endif %}
+
+{% endblock content %}

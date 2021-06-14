@@ -1,9 +1,23 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
+
+
+<div class="header-bar">
+    <button type="submit" onclick="history.go(-1);">Voltar</button>
+</div>
+
 <h1>Login</h1>
 
 <form action="{% url 'users:login' %}" method="post">
   {% csrf_token %}
   {{ form.as_p }}
-  <button type="submit" id="submit">Login</button>
+  <button type="submit" id="submit" class="inline">Acessar</button>
 </form>
 
-<button><a href="{% url 'users:index' %}">Register</a></button>
+<form action="{% url 'users:index' %}">
+  <button type="submit" class="inline">Cadastrar</button>
+</form>
+
+
+{% endblock content %}

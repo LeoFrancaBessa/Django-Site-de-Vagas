@@ -1,24 +1,36 @@
+{% extends 'applicant/base.html' %}
+
+{% block content %}
+
 {% if user.is_company %}
 
-    <p>You're not allowed in this page</p>
+    <h4>Você não é permitido aqui</h4>
 
     <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);">
 
 
 {% elif user.id not in applicant_id %}
 
-    <p>You have to complete you registration first</p>
+    <h4>Você precisa completar seu cadastro</h4>
 
     <button><a href="{% url 'users:applicant-register-complete' %}">Complete Registration</a></button>
 
 
 {% else %}
 
-    <h2>{{vacancie.id}}</h2>
-    <h2>{{vacancie.nome}}</h2>
+    <div class="header-bar">
+        <h1>{{vacancie.nome}}</h1>
+    </div>
 
-    <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);">
+    <h3>Empresa: {{vacancie.company}}</h3>
+    <h3>Faixa Salarial: R$ {{vacancie.faixa_salarial}}</h3>
+    <h3>Requisitos: {{vacancie.req}}</h3>
+    <h3>Escolaridade Miníma: {{vacancie.escolaridade}}</h3>
 
-    <button><a href="{% url 'applicant:confirm-application' %}">I want this vacancie!</a></button>
+    <button type="submit" onclick="history.go(-1);" class="inline">Voltar</button>
+
+    <button class="inline"><a href="{% url 'applicant:confirm-application' %}">Candidatar a Vaga</a></button>
 
 {% endif %}
+
+{% endblock content %}

@@ -1,24 +1,35 @@
+{% extends 'vacancies/base.html' %}
+
+{% block content %}
+
 {% if user.is_applicant %}
 
-    <p>You're not allowed in this page</p>
+    <h4>Você não é permitido aqui</h4>
 
     <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);">
 
 
 {% elif user.id not in company_id %}
 
-    <p>You have to complete you registration first</p>
+    <h4>Você precisa completar o cadastro</h4>
 
     <button><a href="{% url 'users:company-register-complete' %}">Complete Registration</a></button>
 
 
 {% else %}
 
+    <div class="header-bar">
+        <h1>Editar Vaga</h1>
+    </div>
+
     <form method = "POST">
         {% csrf_token %}
         {{form.as_p}}
-        <input type="submit" value="Submit">
+        <button type="submit" id="submit" class="inline">Atualizar</button>
     </form>
-    <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);">
+    
+    <button type="submit" onclick="history.go(-1);" class="inline">Voltar</button>
 
 {% endif %}
+
+{% endblock content %}

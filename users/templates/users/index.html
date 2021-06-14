@@ -1,8 +1,27 @@
-<h1>Hello</h1>
-<h2>Select user type</h2>
+{% extends 'users/base.html' %}
 
-<button><a href="{% url 'users:register-applicant' %}">Applicant Register</a></button>
-<button><a href="{% url 'users:register-company' %}">Company Register</a></button>
+{% block content %}
 
-<h2>Already has an account?</h2>
-<button><a href="{% url 'users:login' %}">Login</a></button>
+
+<div class="header-bar">
+    <h1>Olá, seja bem vindo ao site!</h1>
+</div>
+
+
+<h2>Para se cadastrar, selecione o tipo de usuário</h2>
+
+<form action="{% url 'users:register-applicant' %}">
+    <button type="submit" >Cadastro de Candidatos</button>
+</form>
+
+<form action="{% url 'users:register-company' %}">
+    <button type="submit" class="button_margin_top">Cadastro de Empresas</button>
+</form>
+
+
+<h2>Já possui uma conta?</h2>
+<form action="{% url 'users:login' %}">
+    <button type="submit" >Logar</button>
+</form>
+
+{% endblock content %}

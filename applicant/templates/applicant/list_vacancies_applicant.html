@@ -1,13 +1,13 @@
 {% if user.is_company %}
 
-    <p>You're not allowed in this page</p>
+    <h4>Você não é permitido aqui</h4>
 
     <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);">
 
 
 {% elif user.id not in applicant_id %}
 
-    <p>You have to complete you registration first</p>
+    <h4>Você precisa completar seu cadastro</h4>
 
     <button><a href="{% url 'users:applicant-register-complete' %}">Complete Registration</a></button>
 

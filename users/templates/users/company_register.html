@@ -1,7 +1,18 @@
-<h1>Register Company</h1>
+{% extends 'users/base.html' %}
+
+{% block content %}
+
+<div class="header-bar">
+  <h1>Registrar Empresa</h1>
+</div>
+
 
 <form method="post">
   {% csrf_token %}
   {{ form.as_p }}
-  <button type="submit" id="submit">Register</button>
+  <button type="submit" id="submit" class="inline">Registar</button>
 </form>
+
+<button type="submit" onclick="history.go(-1);" class="inline">Voltar</button>
+
+{% endblock content %}

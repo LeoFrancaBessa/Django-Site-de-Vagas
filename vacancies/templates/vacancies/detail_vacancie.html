@@ -1,31 +1,49 @@
+{% extends 'vacancies/base.html' %}
+
+{% block content %}
+
 {% if user.is_applicant %}
 
-    <p>You're not allowed in this page</p>
+    <h4>Você não é permitido aqui</h4>
 
     <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);">
 
 
 {% elif user.id not in company_id %}
 
-    <p>You have to complete you registration first</p>
+    <h4>Você precisa completar o cadastro</h4>
 
     <button><a href="{% url 'users:company-register-complete' %}">Complete Registration</a></button>
 
 
 {% else %}
 
-        <h3>Company: {{vacancie.company}}</h3>
-        <h3>Name: {{vacancie.nome}}</h3>
+        <div class="header-bar">
+            <h2>{{vacancie.nome}}</h2>
+        </div>
 
-        <h2>Applicants in this vacancie: {{num_applicants}}</h2>
+        <h2 style="margin-top: 5%;">Candidatos inscritos na vaga: {{num_applicants}}</h2>
 
-        {% for va in vacancies_applications %}
-            {% if va.vaga == vacancie %}
-                <p><a href="{% url 'vacancies:detail-applicant' va.candidato.pk %}">{{va.candidato}}</a></p>
-                <p>Points: {{va.pontos_candidato}}</p>
-            {% endif %}
-        {% endfor %}
+        <table id="example" class="table" style="margin-top: 5%;">
+            <thead>
+                <tr>
+                    <th>E-mail</th>
+                    <th>Pontos</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for va in vacancies_applications %}
+                    {% if va.vaga == vacancie %}
+                        <tr>
+                            <td><a href="{% url 'vacancies:detail-applicant' va.candidato.pk %}">{{va.candidato}}</a></td>
+                            <td>{{va.pontos_candidato}}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
 
-        <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);">
+        <button type="submit" onclick="history.go(-1);" class="inline">Voltar</button>
 {% endif %}
 
+{% endblock content %}
