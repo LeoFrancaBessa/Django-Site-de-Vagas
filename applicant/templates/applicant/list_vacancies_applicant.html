@@ -1,45 +1,106 @@
-{% if user.is_company %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'vacancies/style_card.css' %}">
+    <link rel="stylesheet" href="{% static 'vacancies/style_mainPage.css' %}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+
+
+<body>
+
+    {% if user.is_company %}
 
     <h4>Você não é permitido aqui</h4>
 
     <button type="submit" onclick="history.go(-1);" class="inline">Voltar</button>
 
 
-{% elif user.id not in applicant_id %}
+    {% elif user.id not in applicant_id %}
 
-    <h4>Você precisa completar seu cadastro</h4>
+        <h4>Você precisa completar seu cadastro</h4>
 
-    <button><a href="{% url 'users:applicant-register-complete' %}">Completar Cadastro</a></button>
+        <button><a href="{% url 'users:applicant-register-complete' %}">Completar Cadastro</a></button>
 
 
-{% else %}
-    
-    {% if messages %}
-        {% for message in messages %}
-            <script>
-                alert('{{message}}')
-            </script>
+    {% else %}
+        
+        {% if messages %}
+            {% for message in messages %}
+                <script>
+                    alert('{{message}}')
+                </script>
+            {% endfor %}
+        {% endif %}
+
+        <div class="nav">
+            <div class="nav-header">
+              <div class="nav-title">
+                Site Vagas
+              </div>
+            </div>
+            <div class="nav-btn">
+              <label for="nav-check">
+                <span></span>
+                <span></span>
+                <span></span>
+              </label>
+            </div>
+            
+            <div class="nav-links">
+              <a href="{% url 'users:logout' %}">Logout</a>
+              {% for appl in  applicants %}
+                {% if appl.user_id == user.id %}
+                   <a href="{% url 'applicant:update-register' appl.id %}">Editar Cadastro</a>
+                {% endif %}
+            {% endfor %}
+            </div>
+          </div>
+
+
+        <h1 class="text-center" style="margin-bottom: 5%;"> Vagas Disponíveis</h1>
+        
+        <div style="text-align: center; margin-bottom: 5%;">
+                <form method="GET" style="margin-top: 1%;">
+                    <input type="text" name="search-area" value="{{search_input}}">
+                    <input class="button" type="submit" value="Procurar Vagas">
+                </form>
+        </div>
+
+        {% for vac in vacancies %}
+        <div class="col-sm-6 offset-sm-3">
+            <div class="job-card">
+                <div class="job-card__content">
+                    <div class="job-card_info">
+                        <h4><a href="{% url 'applicant:detail-vacancie-applicant' vac.id %}">{{vac.nome}}</a></a></h4>
+                        <p class="mb-0">{{vac.company}}</p>
+                        <p class="mb-0">R$ {{vac.faixa_salarial}}</p>
+                    </div>
+                </div>
+                <div class="job-card__footer">
+                    <div class="job-card_job-type">
+                        <span class="job-label">Escolaridade: {{vac.escolaridade}}</span>
+                    </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
         {% endfor %}
+
     {% endif %}
 
-    {% for appl in  applicants %}
-        {% if appl.user_id == user.id %}
-            <button><a href="{% url 'applicant:update-register' appl.id %}">Edit Register</a></button>
-        {% endif %}
-    {% endfor %}
-
-    <button><a href="{% url 'users:logout' %}">Logout</a></button>
+</body>
 
 
-    <form method="GET" style="margin-top: 1%;">
-        <input type="text" name="search-area" value="{{search_input}}">
-        <input class="button" type="submit" value="Search">
-    </form>
-
-
-    {% for vac in vacancies %}
-        <h1><a href="{% url 'applicant:detail-vacancie-applicant' vac.id %}">{{vac}}</a></h1>
-    {% endfor %}
-
-{% endif %}
-
+</html>

@@ -1,32 +1,97 @@
-{% if user.is_applicant %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'vacancies/style_card.css' %}">
+    <link rel="stylesheet" href="{% static 'vacancies/style_mainPage.css' %}">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
+    <title>Pagina Inicial</title>
+</head>
+
+
+<body>
+
+    {% if user.is_applicant %}
 
     <h4>Você não é permitido aqui</h4>
 
     <button type="submit" onclick="history.go(-1);" class="inline">Voltar</button>
 
 
-{% elif user.id not in company_id %}
+    {% elif user.id not in company_id %}
 
-    <h4>Você precisa completar o cadastro</h4>
+        <h4>Você precisa completar o cadastro</h4>
 
-    <button><a href="{% url 'users:company-register-complete' %}">Completar Cadastro</a></button>
+        <button><a href="{% url 'users:company-register-complete' %}">Completar Cadastro</a></button>
 
 
-{% else %}
+    {% else %}
 
-    <button><a href="{% url 'users:logout' %}">Logout</a></button>
-    <button><a href="{% url 'vacancies:create-vacancie' %}">Create Vacancie</a></button>
+    <div class="nav">
+        <div class="nav-header">
+          <div class="nav-title">
+            Site Vagas
+          </div>
+        </div>
+        <div class="nav-btn">
+          <label for="nav-check">
+            <span></span>
+            <span></span>
+            <span></span>
+          </label>
+        </div>
+        
+        <div class="nav-links">
+          <a href="{% url 'users:logout' %}">Logout</a>
+          <a href="{% url 'vacancies:create-vacancie' %}">Adicionar Vaga</a>
+        </div>
+      </div>
 
-    {% for vacancie in vacancies %}
-    
-        <h2><a href="{% url 'vacancies:detail-vacancie' vacancie.id %}">{{vacancie.nome}}</a></h2> 
-        <a href="{% url 'vacancies:update-vacancie' vacancie.id %}">Edit</a>
-        <a href="{% url 'vacancies:delete-vacancie' vacancie.id %}">Delete</a>
+        <h1 class="text-center" style="margin-bottom: 5%;"> Vagas da Empresa</h1>
 
-    {% empty %}
+        {% for vacancie in vacancies %}
+        
+            <div class="col-sm-6 offset-sm-3">
+                <div class="job-card">
+                    <div class="job-card__content">
+                        <div class="job-card_info">
+                            <h4><a href="{% url 'vacancies:detail-vacancie' vacancie.id%}">{{vacancie.nome}}</a></h4>
+                            <p class="mb-0">R$ {{vacancie.faixa_salarial}}</p>
+                        </div>
+                    </div>
+                    <div class="job-card__footer">
+                        <div class="job-card_job-type">
+                            <span class="job-label">Escolaridade: {{vacancie.escolaridade}}</span>
+                        </div>
+                        <form action="{% url 'vacancies:update-vacancie' vacancie.id%}">
+                            <button type="submit" class="btn btn-primary">Editar</button>
+                        </form>
 
-        <h2>You dont have any vacancies yet</h2>
+                        <form action="{% url 'vacancies:delete-vacancie' vacancie.id%}">
+                            <button type="submit" class="btn btn-danger">Deletar</button>
+                        </form>
 
-    {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
 
-{% endif %}
+        {% empty %}
+
+            <h2>A sua empresa ainda não cadastrou nenhuma vaga.</h2>
+
+        {% endfor %}
+
+    {% endif %}
+
+</body>
+
+
+</html>
