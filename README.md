@@ -10,7 +10,7 @@
 ## Demo
 Link: Em breve...
 
-![](https://i.imgur.com/TqjkWiN.png) ![](https://i.imgur.com/Fxospuv.png)
+![](https://i.imgur.com/TqjkWiN.png)
 
 ## Visão Geral
 Este aplicativo, desenvolvido com a framework Django, visa ser um modelo básico de site de vagas. No qual a empresa pode, por exemplo, adcionar novas vagas e os candidatos podem aplicar sua candidatura a estas vagas.
