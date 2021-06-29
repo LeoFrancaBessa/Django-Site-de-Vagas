@@ -25,13 +25,9 @@ Este aplicativo, desenvolvido com a framework Django, visa ser um modelo básico
 -Versão do Python: 3.8.5
 -Versão do Django: 3.2.2
 
--Super usuário (para acessar o django-admin e a tela com os relatórios):
-
+-Super usuário (login com e-mail):
 E-mail = leo@gmail.com
 Senha = 12345
-
-O login, tanto dos usuários quanto do admin, devem ser feitos por e-mail.
-
 
 -Há dois tipos de usuários básicos, as empresas e os candidatos, cada um com as suas páginas, ou seja, um não pode entrar na do outro.
 
@@ -43,13 +39,6 @@ O login, tanto dos usuários quanto do admin, devem ser feitos por e-mail.
 
 
 -Candidatos podem editar os seus dados, pesquisar por vagas, olhar os detalhes das vagas, assim como se candidatarem a elas.
-
-
--Ao todo existem 4 apps no projeto:
-°Vacancies (cuida do back-end das vagas e das empresas)
-°Users (serve para realizar o cadastro e o login de usuários)
-°Applicant (cuida do back-end dos candidatos)
-°Charts (cuida do back-end dos relatórios)
 
 
 -Existem dois tipos de cadastros, um para as empresas, e o outro para os candidatos. Para que o cadastro de ambos fique completo, também é necessário realizar um cadastro, para informações adicionais. Os usuários só podem usufruir completamente do site se o seu cadastro está completo.
